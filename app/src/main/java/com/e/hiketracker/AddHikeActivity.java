@@ -13,6 +13,7 @@ public class AddHikeActivity extends AppCompatActivity {
 
     TextInputEditText textInputTime;
     TextInputEditText textInputTrailName;
+    TextInputEditText textInputDistance;
     Button buttonAdd;
     HikeFirebaseData hikeDataSource;
 
@@ -23,6 +24,7 @@ public class AddHikeActivity extends AppCompatActivity {
 
         textInputTrailName = (TextInputEditText) findViewById(R.id.textInputTrailName);
         textInputTime = (TextInputEditText) findViewById(R.id.textInputTime);
+        textInputDistance = (TextInputEditText) findViewById(R.id.textInputDistance);
 
         hikeDataSource = new HikeFirebaseData();
         hikeDataSource.open();
@@ -33,12 +35,14 @@ public class AddHikeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name;
-                int time;
+                String time;
+                String distance;
 
-                time = Integer.parseInt(textInputTime.getText().toString());
                 name = textInputTrailName.getText().toString();
+                time = textInputTime.getText().toString();
+                distance = textInputDistance.getText().toString();
 
-                hikeDataSource.addHike(name, time);
+                hikeDataSource.addHike(name, distance, time);
             }
         });
 

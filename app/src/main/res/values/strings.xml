@@ -3,6 +3,7 @@
     <string name="action_login">Login</string>
     <string name="action_add_hike">Add a Hike</string>
     <string name="action_trails">Duluth Trails</string>
+    <string name="textViewMain">Trails Conquered:</string>
 
     <string name="buttonLogin">Login</string>
     <string name="buttonCreateAccount">Create Account</string>
@@ -13,8 +14,10 @@
     <string name="buttonAdd">Add Hike</string>
     <string name="textViewTop">Enter Trail Information</string>
     <string name="textInputTrailName">Trail Name</string>
-    <string name="textInputTime">Time</string>
+    <string name="textInputTime">Time (Hours)</string>
+    <string name="textInputDistance">Distance (Miles)</string>
 
     <string name="textViewTrailName">Trail Name</string>
-    <string name="textViewTrailPoints">Points</string>
+    <string name="textViewDistance">Distance</string>
+    <string name="textViewTime">Time Spent</string>
 </resources>

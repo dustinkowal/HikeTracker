@@ -29,6 +29,7 @@ public class HikeFirebaseData {
         // ---- set up the hike object
         Hike newHike = new Hike(key, name, distance, time);
         Log.d("CIS3334", "New Hike created.");
+        Log.d("CIS3334", "Time =" + time);
         //Hike newHike = new Hike(key, name, time);
         // ---- write the vote to Firebase
         myHikeDbRef.child(key).setValue(newHike);
@@ -43,6 +44,7 @@ public class HikeFirebaseData {
             Hike hike = data.getValue(Hike.class);
             hikeList.add(hike);
             Log.d("CIS3334", "populating hike list: ");
+            Log.d("CIS3334", "Time = " + hike.getsTime());
         }
         return hikeList;
     }
