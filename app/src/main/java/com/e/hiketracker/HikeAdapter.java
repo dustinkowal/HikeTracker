@@ -38,7 +38,7 @@ public class HikeAdapter extends ArrayAdapter<Hike> {
         TextView textViewPoints=(TextView)view.findViewById(R.id.textViewPoints);
         textViewTrailName.setText(hike.getName());
         // textViewDistance.setText(hike.getDistance());
-        textViewPoints.setText(hike.getPoints());
+        textViewPoints.setText(hike.getTime());
 
         return(view);
     }

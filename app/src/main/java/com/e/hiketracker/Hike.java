@@ -10,23 +10,26 @@ public class Hike implements Serializable {
     private String trailName;
     private String latitude;
     private String longitude;
-    private int points;
+    private int time;
 
+    public Hike () {
+
+    }
     public Hike (String key, String trailName) {
         this.key = key;
         this.trailName = trailName;
     }
 
-    public Hike (String key, String name, int points){
+    public Hike (String key, String name, int time){
         this.key = key;
         this.trailName = name;
-        this.points = points;
+        this.time = time;
     }
 
-    public Hike (String key, String trailName, int miles, int points) {
+    public Hike (String key, String trailName, int miles, int time) {
         this.key = key;
         this.trailName = trailName;
-        this.points = points;
+        this.time = time;
         this.distance = miles;
     }
 
@@ -38,8 +41,8 @@ public class Hike implements Serializable {
         return this.distance;
     }
 
-    public int getPoints() {
-        return this.points;
+    public String getTime() {
+        return Integer.toString(this.time);
     }
 
     public void setName(String name){
@@ -50,7 +53,7 @@ public class Hike implements Serializable {
         this.distance = distance;
     }
 
-    public void setPoints(int points){
-        this.points = points;
+    public void setTime(int time){
+        this.time = time;
     }
 }

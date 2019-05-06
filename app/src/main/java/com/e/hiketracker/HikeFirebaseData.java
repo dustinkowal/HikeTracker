@@ -27,23 +27,11 @@ public class HikeFirebaseData {
         String key = myHikeDbRef.child(HikeDataTag).push().getKey();
 //        String key = "REPLACE THIS WITH KEY FROM DATABASE";
         // ---- set up the fish object
-        int points = time * 2;
-        Hike newHike = new Hike(key, name, points);
+        Hike newHike = new Hike(key, name, time);
         // ---- write the vote to Firebase
         myHikeDbRef.child(key).setValue(newHike);
         return newHike;
     }
-    /*
-    FIXME for the extra feature of set list of hikes
-    public void createHikes() {
-        // ---- Get a new database key for the vote
-        String key = myHikeDbRef.child(HikeDataTag).push().getKey();
-        // String key = "REPLACE THIS WITH KEY FROM DATABASE";
-        // ---- set up the fish object
-        Hike engerTower = new Hike(key, "Enger Tower", 2, 4);
-        Hike peidmontTrail = new Hike(key,"Peidmont Trail", 6, 7 );
-    }
-*/
 
     public List<Hike> getAllHikes(DataSnapshot dataSnapshot) {
         List<Hike> hikeList = new ArrayList<Hike>();

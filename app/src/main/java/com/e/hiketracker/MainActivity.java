@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.d("CIS3334", "Starting onDataChange()");        // debugging log
                 hikeList = hikeDataSource.getAllHikes(dataSnapshot);
+                Log.d("CIS3334", "retrieved hike list");
                 // Instantiate a custom adapter for displaying each fish
                 hikeAdapter = new HikeAdapter(MainActivity.this, android.R.layout.simple_list_item_single_choice, hikeList);
                 // Apply the adapter to the list
