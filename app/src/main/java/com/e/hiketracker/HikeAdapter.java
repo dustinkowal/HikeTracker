@@ -2,6 +2,7 @@ package com.e.hiketracker;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,11 +35,14 @@ public class HikeAdapter extends ArrayAdapter<Hike> {
         view = inflater.inflate(R.layout.hike_row_layout, null);
 
         TextView textViewTrailName =(TextView)view.findViewById(R.id.textViewTrailName);
-        //TextView textViewDistance =(TextView)view.findViewById(R.id.textViewDistance);
-        TextView textViewPoints=(TextView)view.findViewById(R.id.textViewPoints);
+        TextView textViewDistance =(TextView)view.findViewById(R.id.textViewDistance);
+        TextView textViewTime =(TextView)view.findViewById(R.id.textViewTime);
+
         textViewTrailName.setText(hike.getName());
-        // textViewDistance.setText(hike.getDistance());
-        textViewPoints.setText(hike.getTime());
+        textViewDistance.setText(hike.getsDistance());
+        Log.d("CIS3334", "Time = " + hike.getsTime());
+        textViewTime.setText(hike.getsTime());
+        Log.d("CIS3334", "Set Time in List View");
 
         return(view);
     }
