@@ -22,21 +22,23 @@ public class HikeFirebaseData {
         return myHikeDbRef;
     }
 
-    public Hike addHike( String name, int time) {
+    public Hike addHike( String name,String distance, String time) {
         // ---- Get a new database key for the vote
         String key = myHikeDbRef.child(HikeDataTag).push().getKey();
 //        String key = "REPLACE THIS WITH KEY FROM DATABASE";
-        // ---- set up the fish object
-        Hike newHike = new Hike(key, name, time);
+        // ---- set up the hike object
+        Hike newHike = new Hike(key, name, distance, time);
+        Log.d("CIS3334", "New Hike created.");
+        //Hike newHike = new Hike(key, name, time);
         // ---- write the vote to Firebase
         myHikeDbRef.child(key).setValue(newHike);
+        Log.d("CIS3334", "Hike added to database");
         return newHike;
     }
 
     public List<Hike> getAllHikes(DataSnapshot dataSnapshot) {
         List<Hike> hikeList = new ArrayList<Hike>();
         Log.d("CIS3334", "Starting for each loop");
-        //FIXME this causes app to crash
         for (DataSnapshot data : dataSnapshot.getChildren()) {
             Hike hike = data.getValue(Hike.class);
             hikeList.add(hike);
