@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Hike Tracker</string>
+    <string name="action_login">Login</string>
+    <string name="action_add_hike">Add a Hike</string>
+    <string name="action_trails">Duluth Trails</string>
+
+    <string name="buttonLogin">Login</string>
+    <string name="buttonCreateAccount">Create Account</string>
+    <string name="textViewLoginTitle">Enter Your Email and Password</string>
+    <string name="textInputEmail">Email</string>
+    <string name="textInputPassword">Password</string>
+
+    <string name="buttonAdd">Add Hike</string>
+    <string name="textViewTop">Enter Trail Information</string>
+    <string name="textInputTrailName">Trail Name</string>
+    <string name="textInputTime">Time</string>
+
+    <string name="textViewTrailName">Trail Name</string>
+    <string name="textViewTrailPoints">Points</string>
+</resources>

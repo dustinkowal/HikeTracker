@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "180785237868",
+    "firebase_url": "https://hiketracker-6a410.firebaseio.com",
+    "project_id": "hiketracker-6a410",
+    "storage_bucket": "hiketracker-6a410.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:180785237868:android:78183eeefe41537e",
+        "android_client_info": {
+          "package_name": "com.e.hiketracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "180785237868-tkp42nksj743ajv5tp15rfu5go168uvc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.e.hiketracker",
+            "certificate_hash": "36614b7224b13a808eef35460bc739ef95eb01b4"
+          }
+        },
+        {
+          "client_id": "180785237868-nml72pv1svflivvamap1k7a8i1m633q0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsj-5ufZkay58MXw-TTJdq71Kke8BMWN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "180785237868-nml72pv1svflivvamap1k7a8i1m633q0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
