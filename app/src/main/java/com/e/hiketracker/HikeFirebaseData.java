@@ -1,7 +1,11 @@
 package com.e.hiketracker;
 
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -13,12 +17,17 @@ public class HikeFirebaseData {
 
     DatabaseReference myHikeDbRef;
     public static final String HikeDataTag = "Hike Data";
+    FirebaseAuth mAuth;
+    private String userId;
 
 
-    public DatabaseReference open()  {
+    public DatabaseReference open(AppCompatActivity mainActivity)  {
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myHikeDbRef = database.getReference(HikeDataTag);
+
+        // set the user id for the current logged in user
+        userId = getUserId(mainActivity);
         return myHikeDbRef;
     }
 
@@ -32,7 +41,7 @@ public class HikeFirebaseData {
         Log.d("CIS3334", "Time =" + time);
         //Hike newHike = new Hike(key, name, time);
         // ---- write the vote to Firebase
-        myHikeDbRef.child(key).setValue(newHike);
+        myHikeDbRef.child("user").child(key).setValue(newHike);
         Log.d("CIS3334", "Hike added to database");
         return newHike;
     }
@@ -40,12 +49,47 @@ public class HikeFirebaseData {
     public List<Hike> getAllHikes(DataSnapshot dataSnapshot) {
         List<Hike> hikeList = new ArrayList<Hike>();
         Log.d("CIS3334", "Starting for each loop");
-        for (DataSnapshot data : dataSnapshot.getChildren()) {
+        for (DataSnapshot data : dataSnapshot.child("user").child(userId).getChildren()) {
             Hike hike = data.getValue(Hike.class);
             hikeList.add(hike);
             Log.d("CIS3334", "populating hike list: ");
             Log.d("CIS3334", "Time = " + hike.getsTime());
         }
         return hikeList;
+    }
+
+    public Double getTotalTime(DataSnapshot dataSnapshot){
+        Double totalTime = 0.0;
+
+        for (DataSnapshot data : dataSnapshot.getChildren()) {
+            Hike hike = data.getValue(Hike.class);
+            totalTime = totalTime + Double.parseDouble(hike.getsTime());
+        }
+
+        return totalTime;
+    }
+
+    public Double getTotalDistance(DataSnapshot dataSnapshot) {
+        Double totalDistance = 0.0;
+
+        for(DataSnapshot data : dataSnapshot.getChildren()){
+            Hike hike = data.getValue(Hike.class);
+            //FIXME causes app to crash
+            totalDistance = totalDistance + Double.parseDouble(hike.getsDistance());
+        }
+        return totalDistance;
+    }
+
+    // get the current logged in user's id from Firebase
+    private String getUserId(AppCompatActivity activity) {
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user == null) {
+            // User is signed out
+            Log.d("CSS3334","onAuthStateChanged - User NOT is signed in");
+            Intent signInIntent = new Intent(activity, LoginActivity.class);
+            activity.startActivity(signInIntent);
+        }
+        return user.getUid();
     }
 }
