@@ -28,6 +28,8 @@ public class HikeFirebaseData {
 
         // set the user id for the current logged in user
         userId = getUserId(mainActivity);
+        Log.d("CIS3334", "Database Reference open() userId = " + userId);
+
         return myHikeDbRef;
     }
 
@@ -41,7 +43,7 @@ public class HikeFirebaseData {
         Log.d("CIS3334", "Time =" + time);
         //Hike newHike = new Hike(key, name, time);
         // ---- write the vote to Firebase
-        myHikeDbRef.child("user").child(key).setValue(newHike);
+        myHikeDbRef.child("user").child(userId).child(key).setValue(newHike);
         Log.d("CIS3334", "Hike added to database");
         return newHike;
     }
@@ -52,7 +54,8 @@ public class HikeFirebaseData {
         for (DataSnapshot data : dataSnapshot.child("user").child(userId).getChildren()) {
             Hike hike = data.getValue(Hike.class);
             hikeList.add(hike);
-            Log.d("CIS3334", "populating hike list: ");
+            //FIXME these don't sho in Logcat
+            Log.d("CIS3334", "populating hike list user Id = " + userId);
             Log.d("CIS3334", "Time = " + hike.getsTime());
         }
         return hikeList;

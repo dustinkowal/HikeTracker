@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 
@@ -46,6 +47,7 @@ public class AddHikeActivity extends AppCompatActivity {
                 distance = textInputDistance.getText().toString();
 
                 hikeDataSource.addHike(name, distance, time);
+                Toast.makeText(getApplicationContext(), "Hike Added!", Toast.LENGTH_LONG).show();
             }
         });
 

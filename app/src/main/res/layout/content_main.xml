@@ -45,7 +45,8 @@
             android:id="@+id/textViewTotals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/textViewTotals" />
+            android:text="@string/textViewTotals"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
         <LinearLayout
             android:layout_width="match_parent"
