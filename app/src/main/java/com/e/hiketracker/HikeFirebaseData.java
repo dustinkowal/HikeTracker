@@ -61,7 +61,7 @@ public class HikeFirebaseData {
     public Double getTotalTime(DataSnapshot dataSnapshot){
         Double totalTime = 0.0;
 
-        for (DataSnapshot data : dataSnapshot.getChildren()) {
+        for (DataSnapshot data : dataSnapshot.child("user").child(userId).getChildren()) {
             Hike hike = data.getValue(Hike.class);
             totalTime = totalTime + Double.parseDouble(hike.getsTime());
         }
@@ -72,9 +72,8 @@ public class HikeFirebaseData {
     public Double getTotalDistance(DataSnapshot dataSnapshot) {
         Double totalDistance = 0.0;
 
-        for(DataSnapshot data : dataSnapshot.getChildren()){
+        for(DataSnapshot data : dataSnapshot.child("user").child(userId).getChildren()){
             Hike hike = data.getValue(Hike.class);
-            //FIXME causes app to crash
             totalDistance = totalDistance + Double.parseDouble(hike.getsDistance());
         }
         return totalDistance;

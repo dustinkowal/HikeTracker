@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<Hike> hikeAdapter;
     int positionSelected;
 
+    TextView textViewTotalTime;
+    TextView textViewTotalDistance;
+
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
@@ -44,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        checkUserAuthenticated();
         setupListView();
         setupFirebaseDataChange();
-
         mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() { //initialized mAuthListener
@@ -63,13 +68,33 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        //setup textViews to display total time and distance
+        textViewTotalDistance = (TextView) findViewById(R.id.textViewTotalDistance);
+        textViewTotalTime = (TextView) findViewById(R.id.textViewTotalTime);
 
 
     }
 
+    private void checkUserAuthenticated() {
+        mAuth = FirebaseAuth.getInstance(); //declare object for Firebase
+        mAuthListener = new FirebaseAuth.AuthStateListener() { //initialized mAuthListener
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                //track the user when they sign in or out using the firebaseAuth
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    // User is signed out
+                    Log.d("CSS3334","onAuthStateChanged - User NOT is signed in");
+                    Intent signInIntent = new Intent(getBaseContext(), LoginActivity.class);
+                    startActivity(signInIntent);
+                }
+            }
+        };
+    }
+
     private void setupFirebaseDataChange() {
         hikeDataSource = new HikeFirebaseData();
-        myHikeDbRef = hikeDataSource.open();
+        myHikeDbRef = hikeDataSource.open(this);
         myHikeDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -81,6 +106,12 @@ public class MainActivity extends AppCompatActivity {
                 // Apply the adapter to the list
                 Log.d("CIS3334", "Setting adapter");
                 listViewHike.setAdapter(hikeAdapter);
+
+                //change totals
+                textViewTotalDistance.setText(hikeDataSource.getTotalDistance(dataSnapshot).toString());
+                textViewTotalTime.setText(hikeDataSource.getTotalTime(dataSnapshot).toString());
+
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -151,5 +182,6 @@ public class MainActivity extends AppCompatActivity {
             mAuth.removeAuthStateListener(mAuthListener); // remove the listener
         }
     }
+
 
 }

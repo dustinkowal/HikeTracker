@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.database.DatabaseReference;
+
 public class AddHikeActivity extends AppCompatActivity {
 
     TextInputEditText textInputTime;
@@ -27,7 +29,8 @@ public class AddHikeActivity extends AppCompatActivity {
         textInputDistance = (TextInputEditText) findViewById(R.id.textInputDistance);
 
         hikeDataSource = new HikeFirebaseData();
-        hikeDataSource.open();
+       //DatabaseReference myDbRef =
+        hikeDataSource.open(this);
 
         buttonAdd = (Button) findViewById(R.id.buttonAddHike);
 

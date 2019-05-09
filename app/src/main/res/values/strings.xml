@@ -20,4 +20,10 @@
     <string name="textViewTrailName">Trail Name</string>
     <string name="textViewDistance">Distance</string>
     <string name="textViewTime">Time Spent</string>
+
+    <string name="textViewTotals">Totals:</string>
+    <string name="textViewTTime">Time:</string>
+    <string name="textViewTDistance">Distance:</string>
+    <string name="textViewTotalTime">Total Time</string>
+    <string name="textViewTotalDistance">Total Distance</string>
 </resources>
