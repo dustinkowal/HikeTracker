@@ -54,7 +54,6 @@ public class HikeFirebaseData {
         for (DataSnapshot data : dataSnapshot.child("user").child(userId).getChildren()) {
             Hike hike = data.getValue(Hike.class);
             hikeList.add(hike);
-            //FIXME these don't sho in Logcat
             Log.d("CIS3334", "populating hike list user Id = " + userId);
             Log.d("CIS3334", "Time = " + hike.getsTime());
         }
