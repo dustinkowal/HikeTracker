@@ -50,11 +50,16 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Toast.makeText(getApplicationContext(), "Login to view trails and add hikes.", Toast.LENGTH_LONG).show();
         checkUserAuthenticated();
         setupListView();
         setupFirebaseDataChange();
         mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        //sends message if there is no user logged in
+        if(user == null){
+            Toast.makeText(getApplicationContext(), "Login to view trails and add hikes.", Toast.LENGTH_LONG).show();
+        }
 
         mAuthListener = new FirebaseAuth.AuthStateListener() { //initialized mAuthListener
             @Override
@@ -164,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapter, View parent,
                                     int position, long id) {
                 positionSelected = position;
-                Log.d("MAIN", "Fish selected at position " + positionSelected);
+                //Log.d("MAIN", "Fish selected at position " + positionSelected);
             }
         });
     }
@@ -181,6 +186,14 @@ public class MainActivity extends AppCompatActivity {
         //discontinue the authentication
         super.onStop();
         if (mAuthListener != null) {
+            //signout current user
+            mAuth.signOut();
+            if(mAuth.getCurrentUser() == null){
+                Log.d("CIS 3334", "User has been logged out");
+            }
+            else{
+                Log.d("CIS 3334", "Error in logging user out");
+            }
             mAuth.removeAuthStateListener(mAuthListener); // remove the listener
         }
     }
