@@ -17,6 +17,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * Login Activity allows users to sign in with a email and password
+ */
 public class LoginActivity extends AppCompatActivity {
 
     Button buttonLogin;
@@ -55,6 +58,9 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Creates a new user
+     */
     private void createNewUser(){
         String email = textInputEmail.getText().toString();
         String password = textInputPassword.getText().toString();
@@ -75,6 +81,9 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Signs the user in
+     */
     private void login(){
         String email = textInputEmail.getText().toString();
         String password = textInputPassword.getText().toString();
@@ -92,6 +101,11 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Inflates the options menu.
+     * @param menu
+     * @return true.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -99,6 +113,11 @@ public class LoginActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Inflates the options menu.
+     * @param item user selects from the menu
+     * @return item selected by user.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

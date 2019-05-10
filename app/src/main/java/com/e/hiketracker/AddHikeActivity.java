@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 
+/**
+ * Allows users to add hikes
+ */
 public class AddHikeActivity extends AppCompatActivity {
 
     TextInputEditText textInputTime;
@@ -59,6 +62,11 @@ public class AddHikeActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Runs code based on which options menu item the user selects
+     * @param item
+     * @return item
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

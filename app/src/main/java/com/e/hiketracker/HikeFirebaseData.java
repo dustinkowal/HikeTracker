@@ -13,6 +13,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Used to connect the app with the database
+ */
 public class HikeFirebaseData {
 
     DatabaseReference myHikeDbRef;
@@ -21,6 +24,12 @@ public class HikeFirebaseData {
     private String userId;
 
 
+    /**
+     * Used by other classes and activities to open the DatabaseReference also sets userID
+     *
+     * @param mainActivity
+     * @return myHikeDbRef
+     */
     public DatabaseReference open(AppCompatActivity mainActivity)  {
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -33,6 +42,12 @@ public class HikeFirebaseData {
         return myHikeDbRef;
     }
 
+    /**
+     * used to add Hike to database
+     *
+     * @param name, distance, time
+     * @return object with the new Hike information
+     */
     public Hike addHike( String name,String distance, String time) {
         // ---- Get a new database key for the vote
         String key = myHikeDbRef.child(HikeDataTag).push().getKey();
@@ -48,6 +63,12 @@ public class HikeFirebaseData {
         return newHike;
     }
 
+    /**
+     * Gets all hikes from the database
+     *
+     * @param dataSnapshot
+     * @return list full of hikes
+     */
     public List<Hike> getAllHikes(DataSnapshot dataSnapshot) {
         List<Hike> hikeList = new ArrayList<Hike>();
         Log.d("CIS3334", "Starting for each loop");
@@ -60,6 +81,12 @@ public class HikeFirebaseData {
         return hikeList;
     }
 
+    /**
+     * Gets total time for all hikes in the database
+     *
+     * @param dataSnapshot
+     * @return totalTime
+     */
     public Double getTotalTime(DataSnapshot dataSnapshot){
         Double totalTime = 0.0;
 
@@ -71,6 +98,12 @@ public class HikeFirebaseData {
         return totalTime;
     }
 
+    /**
+     * Gets total distance for all hikes in the database
+     *
+     * @param dataSnapshot
+     * @return totalDistance
+     */
     public Double getTotalDistance(DataSnapshot dataSnapshot) {
         Double totalDistance = 0.0;
 
@@ -81,7 +114,12 @@ public class HikeFirebaseData {
         return totalDistance;
     }
 
-    // get the current logged in user's id from Firebase
+    /**
+     * Gets the ID of the current user, if no one is signed in it automatically starts LoginActivity
+     *
+     * @param activity
+     * @return userID
+     */
     private String getUserId(AppCompatActivity activity) {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();

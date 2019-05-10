@@ -27,6 +27,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
+/**
+ * MainActivity for the App
+ */
 public class MainActivity extends AppCompatActivity {
 
 
@@ -82,6 +85,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Checks the authentication for the current user
+     *
+     */
     private void checkUserAuthenticated() {
         mAuth = FirebaseAuth.getInstance(); //declare object for Firebase
         mAuthListener = new FirebaseAuth.AuthStateListener() { //initialized mAuthListener
@@ -99,6 +106,10 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
+    /**
+     * Tracks if data changes in the database and changes the ListView accordingly
+     *
+     */
     private void setupFirebaseDataChange() {
         hikeDataSource = new HikeFirebaseData();
         myHikeDbRef = hikeDataSource.open(this);
@@ -134,6 +145,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Used to track which item the user selects from the menu
+     *
+     * @param item
+     * @return item selected by user
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -163,6 +180,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Creates the ListView
+     *
+     */
     private void setupListView() {
         listViewHike = (ListView) findViewById(R.id.listViewHike);
         listViewHike.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -174,6 +195,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Updates Authentication listener when the app starts
+     *
+     */
     @Override
     public void onStart() {
         //initiate the authentication listener
@@ -181,19 +206,23 @@ public class MainActivity extends AppCompatActivity {
         mAuth.addAuthStateListener(mAuthListener); // update the listener on the users place
     }
 
+    /**
+     * Signs out user when application is closed.
+     *
+     */
     @Override
     public void onStop() {
         //discontinue the authentication
         super.onStop();
         if (mAuthListener != null) {
-            //signout current user
-            mAuth.signOut();
+            //signout current user stop using because it would sign out user when switching activities
+            /*mAuth.signOut();
             if(mAuth.getCurrentUser() == null){
                 Log.d("CIS 3334", "User has been logged out");
             }
             else{
                 Log.d("CIS 3334", "Error in logging user out");
-            }
+            }*/
             mAuth.removeAuthStateListener(mAuthListener); // remove the listener
         }
     }
